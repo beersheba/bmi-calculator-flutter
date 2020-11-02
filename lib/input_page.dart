@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.dart';
 import 'widget/icon_content.dart';
 import 'widget/reusable_card.dart';
+import 'widget/round_icon_button.dart';
 
 enum Gender {
   male,
@@ -16,9 +17,10 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Gender selectedGender;
-
-  double _currentSliderValue = 180.0;
+  Gender selectedGender = Gender.male;
+  double height = 180.0;
+  int weight = 60;
+  int age = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -82,7 +84,7 @@ class _InputPageState extends State<InputPage> {
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: [
                       Text(
-                        _currentSliderValue.toString(),
+                        height.toString(),
                         style: numberTextStyle,
                       ),
                       Text(
@@ -104,13 +106,13 @@ class _InputPageState extends State<InputPage> {
                           RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
-                      value: _currentSliderValue,
+                      value: height,
                       min: 120.0,
                       max: 220.0,
                       divisions: 100,
                       onChanged: (double value) {
                         setState(() {
-                          _currentSliderValue = value;
+                          height = value;
                         });
                       },
                     ),
@@ -123,10 +125,78 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: [
                 Expanded(
-                  child: ReusableCard(),
+                  child: ReusableCard(
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'WEIGHT',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          weight.toString(),
+                          style: numberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () => setState(
+                                () => weight > 0 ? weight-- : null,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () => setState(
+                                () => weight++,
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
-                  child: ReusableCard(),
+                  child: ReusableCard(
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'AGE',
+                          style: labelTextStyle,
+                        ),
+                        Text(
+                          age.toString(),
+                          style: numberTextStyle,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: () => setState(
+                                () => age > 0 ? age-- : null,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            ),
+                            RoundIconButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: () => setState(
+                                () => age++,
+                              ),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -136,6 +206,12 @@ class _InputPageState extends State<InputPage> {
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: bottomContainerHeight,
+            child: Center(
+              child: Text(
+                'CALCULATE YOUR BMI',
+                style: labelTextStyle.copyWith(color: Colors.white),
+              ),
+            ),
           )
         ],
       ),
