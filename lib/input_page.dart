@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -12,6 +13,8 @@ enum Gender {
 }
 
 class InputPage extends StatefulWidget {
+  static const routeName = '/';
+
   @override
   _InputPageState createState() => _InputPageState();
 }
@@ -201,15 +204,20 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            color: bottomContainerColor,
-            margin: EdgeInsets.only(top: 10.0),
-            width: double.infinity,
-            height: bottomContainerHeight,
-            child: Center(
-              child: Text(
-                'CALCULATE YOUR BMI',
-                style: labelTextStyle.copyWith(color: Colors.white),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, ResultPage.routeName);
+            },
+            child: Container(
+              color: bottomContainerColor,
+              margin: EdgeInsets.only(top: 10.0),
+              width: double.infinity,
+              height: bottomContainerHeight,
+              child: Center(
+                child: Text(
+                  'CALCULATE YOUR BMI',
+                  style: labelTextStyle.copyWith(color: Colors.white),
+                ),
               ),
             ),
           )
