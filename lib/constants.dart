@@ -19,7 +19,6 @@ const numberTextStyle = TextStyle(
 );
 
 const resultLabelTextStyle = TextStyle(
-  color: Color(0xFF47CB7D),
   fontSize: 22.0,
 );
 

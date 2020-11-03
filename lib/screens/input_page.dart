@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/bmi_brain.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -22,7 +23,7 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender = Gender.male;
-  double height = 180.0;
+  int height = 180;
   int weight = 60;
   int age = 18;
 
@@ -110,13 +111,13 @@ class _InputPageState extends State<InputPage> {
                           RoundSliderOverlayShape(overlayRadius: 30.0),
                     ),
                     child: Slider(
-                      value: height,
+                      value: height.toDouble(),
                       min: 120.0,
                       max: 220.0,
                       divisions: 100,
                       onChanged: (double value) {
                         setState(() {
-                          height = value;
+                          height = value.toInt();
                         });
                       },
                     ),
@@ -206,10 +207,19 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           BottomButton(
-              text: 'CALCULATE YOUR BMI',
-              onTap: () {
-                Navigator.pushNamed(context, ResultPage.routeName);
-              })
+            text: 'CALCULATE YOUR BMI',
+            onTap: () {
+              BmiBrain bmiBrain = BmiBrain(
+                height: height,
+                mass: weight,
+              );
+              Navigator.pushNamed(
+                context,
+                ResultPage.routeName,
+                arguments: bmiBrain,
+              );
+            },
+          )
         ],
       ),
     );

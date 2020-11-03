@@ -5,6 +5,13 @@ import '../widgets/bottom_button.dart';
 import '../widgets/reusable_card.dart';
 
 class ResultPage extends StatelessWidget {
+  ResultPage({this.bmi, this.result, this.resultColor, this.recommendation});
+
+  final String bmi;
+  final String result;
+  final Color resultColor;
+  final String recommendation;
+
   static const routeName = '/result';
 
   @override
@@ -25,23 +32,29 @@ class ResultPage extends StatelessWidget {
           ),
           Expanded(
             child: ReusableCard(
-              cardChild: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Text(
-                    'OVERWEIGHT',
-                    style: resultLabelTextStyle,
-                  ),
-                  Text(
-                    '26.7',
-                    style: resultNumberTextStyle,
-                  ),
-                  Text(
-                    'Some text to display',
-                    style: resultBodyTextStyle,
-                  )
-                ],
+              cardChild: Padding(
+                padding: const EdgeInsets.all(18.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      result.toUpperCase(),
+                      style: resultLabelTextStyle.copyWith(
+                        color: resultColor,
+                      ),
+                    ),
+                    Text(
+                      bmi,
+                      style: resultNumberTextStyle,
+                    ),
+                    Text(
+                      recommendation,
+                      textAlign: TextAlign.center,
+                      style: resultBodyTextStyle,
+                    )
+                  ],
+                ),
               ),
             ),
           ),

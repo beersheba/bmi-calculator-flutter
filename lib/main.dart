@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/bmi_brain.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -21,8 +22,14 @@ class BMICalculator extends StatelessWidget {
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case ResultPage.routeName:
+            final BmiBrain args = settings.arguments;
             return PageTransition(
-              child: ResultPage(),
+              child: ResultPage(
+                bmi: args.getBmi(),
+                result: args.getResult(),
+                resultColor: args.getResultColor(),
+                recommendation: args.getRecommendation(),
+              ),
               type: PageTransitionType.rightToLeftWithFade,
             );
             break;
