@@ -1,11 +1,12 @@
-import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'constants.dart';
-import 'widget/icon_content.dart';
-import 'widget/reusable_card.dart';
-import 'widget/round_icon_button.dart';
+import '../constants.dart';
+import '../screens/results_page.dart';
+import '../widgets/bottom_button.dart';
+import '../widgets/icon_content.dart';
+import '../widgets/reusable_card.dart';
+import '../widgets/round_icon_button.dart';
 
 enum Gender {
   male,
@@ -204,23 +205,11 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, ResultPage.routeName);
-            },
-            child: Container(
-              color: bottomContainerColor,
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: bottomContainerHeight,
-              child: Center(
-                child: Text(
-                  'CALCULATE YOUR BMI',
-                  style: labelTextStyle.copyWith(color: Colors.white),
-                ),
-              ),
-            ),
-          )
+          BottomButton(
+              text: 'CALCULATE YOUR BMI',
+              onTap: () {
+                Navigator.pushNamed(context, ResultPage.routeName);
+              })
         ],
       ),
     );

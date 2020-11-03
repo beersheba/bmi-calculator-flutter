@@ -1,7 +1,8 @@
-import 'package:bmi_calculator/results_page.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
-import 'input_page.dart';
+import 'screens/input_page.dart';
+import 'screens/results_page.dart';
 
 void main() => runApp(BMICalculator());
 
@@ -16,7 +17,18 @@ class BMICalculator extends StatelessWidget {
       initialRoute: InputPage.routeName,
       routes: {
         InputPage.routeName: (context) => InputPage(),
-        ResultPage.routeName: (context) => ResultPage()
+      },
+      onGenerateRoute: (settings) {
+        switch (settings.name) {
+          case ResultPage.routeName:
+            return PageTransition(
+              child: ResultPage(),
+              type: PageTransitionType.rightToLeftWithFade,
+            );
+            break;
+          default:
+            return null;
+        }
       },
     );
   }
